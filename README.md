@@ -11,6 +11,7 @@ Trained weights can be found at:
 ## Performance
 
 On test set:
-CER:  17.054 %
 
-WER:  33.068 %
+CER:  13.681 %
+
+WER:  28.243 %
