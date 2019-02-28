@@ -9,6 +9,8 @@ Put the IAM dataset "words" data into data.
 Trained weights can be found at:
 
 ## Performance
+
 On test set:
 CER:  17.054 %
+
 WER:  33.068 %
