@@ -1,0 +1,20 @@
+Results:
+---------------------
+On test set:
+CER:  17.054 %
+WER:  33.068 %
+
+On train set:
+CER:  0.009 %
+WER:  0.913 %
+
+-----------------------
+-----------------------
+On the full dataset:
+On test set:
+CER:  17.054 %
+WER:  33.068 %
+
+On train set:
+CER:  0.009 %
+WER:  0.913 %

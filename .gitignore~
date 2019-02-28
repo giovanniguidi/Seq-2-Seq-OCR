@@ -1,0 +1,9 @@
+studio/experiments/*
+**/.ipynb_checkpoints/*
+**.log
+/.idea
+*.pyc
+*/*.pyc
+*/**/__pycache__/*
+*.jpg
+*.png
