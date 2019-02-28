@@ -1,16 +1,14 @@
-# Seq-2-Seq-OCR
+## Seq-2-Seq-OCR
 Handwritten text recognition system using Seq-2-Seq
 
-# Data
+## Data
 Put the IAM dataset "words" data into data.
 
-# Weights
+## Weights
 
 Trained weights can be found at:
 
-
-
-# Performance
+## Performance
 On test set:
 CER:  17.054 %
 WER:  33.068 %
