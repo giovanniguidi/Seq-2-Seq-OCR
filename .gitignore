@@ -3,6 +3,6 @@
 *.pyc
 */*.pyc
 */**/__pycache__/*
-data/
+datasets/
 old/
 snapshots/
