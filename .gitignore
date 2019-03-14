@@ -3,6 +3,10 @@
 *.pyc
 */*.pyc
 */**/__pycache__/*
-datasets/
+datasets/*
 old/
-snapshots/
+snapshots/*
+experiments/*
+!.gitkeep
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
