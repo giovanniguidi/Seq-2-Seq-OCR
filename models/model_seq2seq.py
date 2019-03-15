@@ -1,18 +1,9 @@
 import os
-#import pandas as pd
 import numpy as np
 import cv2
-#from PIL import Image
 import random
-#import tensorflow as tf
-#import re
 import datetime
 import io
-#from sklearn.model_selection import train_test_split
-#from matplotlib import pyplot as plt
-#import pickle
-#import string
-#from utils import score_prediction, generate_token_index, y_labels, generate_dataset
 import json
 import keras
 import string
@@ -26,9 +17,7 @@ from keras.optimizers import Adam
 
 from base.base_model import BaseModel
 
-#class ConvMnistModel(BaseModel):
 class ModelSeq2Seq(BaseModel):
-    #def __init__(self, config):
     def __init__(self, config, max_decoder_seq_length, num_decoder_tokens):
         super().__init__(config)
         self.y_size = config['image']['image_size']['y_size']
@@ -38,24 +27,11 @@ class ModelSeq2Seq(BaseModel):
         self.latent_dim = config['network']['latent_dim']  # Latent dimensionality of the encoding space.
         self.max_decoder_seq_length = max_decoder_seq_length
         self.num_decoder_tokens = num_decoder_tokens
-        
-        #build model
-        
-        #print('loading model')
-        #self.model = load_model('snapshots/snapshot_last.h5')
-        #print('model loaded')
+
         self.model = self.build_model()
-        #print('loading weights')
-        #self.model.load_weights('./snapshots/weights.h5')
-        
-        #save graph on "snapshots/" folder
-        #self.save_graph(self.model, 'snapshots/graph.json')
 
     def build_model(self):
-        model = self.build_graph()
-        
-        #model.load_weights('./snapshots/snapshot_last.h5')
-        
+        model = self.build_graph()        
         model.compile(optimizer = self.optimizer, loss = self.loss)
 
         return model

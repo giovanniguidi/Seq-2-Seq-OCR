@@ -12,10 +12,6 @@ from predictors.predictor_seq2seq import PredictorSeq2Seq
 from utils.score_prediction import score_prediction
 from preprocessing.preproc_functions import read_image_BW, normalize_0_mean_1_variance_BW
 
-#argparser = argparse.ArgumentParser(description='Seq2seq')
-#argparser.add_argument('-c', '--conf', help='path to configuration file')
-#argparser.add_argument('--predict-on-test', action='store_true', help='predict mode')
-
 
 def train(args):
     config_path = args.conf

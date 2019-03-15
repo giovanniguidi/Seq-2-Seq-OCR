@@ -4,6 +4,7 @@
 */*.pyc
 */**/__pycache__/*
 datasets/words*
+tensorboard/*
 old/
 snapshots/*
 experiments/*

@@ -1,11 +1,7 @@
 import os
-#import pandas as pd
 import numpy as np
 import cv2
-#from PIL import Image
 import random
-#import tensorflow as tf
-#import re
 import datetime
 import io
 import json

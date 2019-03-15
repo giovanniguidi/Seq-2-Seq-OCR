@@ -1,18 +1,9 @@
 import os
-#import pandas as pd
 import numpy as np
 import cv2
-#from PIL import Image
 import random
-#import tensorflow as tf
-#import re
-import datetime
+#import datetime
 import io
-#from sklearn.model_selection import train_test_split
-#from matplotlib import pyplot as plt
-#import pickle
-#import string
-#from utils import score_prediction, generate_token_index, y_labels, generate_dataset
 import json
 import keras
 import string
@@ -28,13 +19,10 @@ from preprocessing.preproc_functions import read_image_BW, normalize_0_mean_1_va
 
 from base.base_predictor import BasePredictor
 
-
-
 class PredictorSeq2Seq(BasePredictor):
     def __init__(self, config, graph_path, weights_path, num_decoder_tokens, max_decoder_seq_length,
                 token_indices, reverse_token_indices, batch_size = 64):
         super().__init__(config)
-
         self.num_decoder_tokens = num_decoder_tokens
         self.max_decoder_seq_length = max_decoder_seq_length
         self.token_indices = token_indices
@@ -42,10 +30,7 @@ class PredictorSeq2Seq(BasePredictor):
         self.batch_size = batch_size
         self.model = self.load_model(graph_path, weights_path)
         self.encoder_graph, self.decoder_graph = self.build_graphs()
-#        self.train_generator = train_generator
-#        self.val_generator = val_generator
-        
-        #self.config = config
+    
  #       self.callbacks_list = self.callbacks()
  #       self.loss = []
  #       self.acc = []

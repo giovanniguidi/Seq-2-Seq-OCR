@@ -2,6 +2,8 @@
 
 Handwritten text recognition using Seq-2-Seq modelling with Keras.
 
+
+
 ## Data
 
 Download the IAM dataset "words" (words/ and words.txt) from 
