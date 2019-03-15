@@ -14,7 +14,9 @@ Put the IAM dataset "words" data into a "data" folder.
 Folder structure should be data/a01 ... data/a02 and data/words.txt
 
 
-![picture alt](http://www.brightlightpictures.com/assets/images/portfolio/thethaw_header.jpg "Title is optional")
+This is and example of the dataset:
+
+![picture alt](https://github.com/giovanniguidi/Seq-2-Seq-OCR/blob/master/test_images/b01-049-01-00.png "")
 
 # Project structure
 
