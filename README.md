@@ -2,7 +2,7 @@
 
 Handwritten text recognition using Seq-2-Seq modelling with Keras.
 
-This project is based on Sequence-To-Sequence modelling, initially introduced for machine translation by https://arxiv.org/pdf/1409.3215.pdf:
+This project is based on Sequence-To-Sequence modelling, initially introduced for machine translation by Sutskever et al. in 2014 (https://arxiv.org/pdf/1409.3215.pdf):
 
 ![picture alt](https://github.com/giovanniguidi/Seq-2-Seq-OCR/blob/master/figures/seq2seq.png "")
 
@@ -83,7 +83,11 @@ If you want to use these weights be sure that you use the original labels in "da
 
 To train a model run:
 
+Explain what these tests test and why
+
+```
 python3 main.py -c configs/config.yml --train
+```
 
 If you set "weights_initialization" in config.yml you can use a pretrained model to inizialize the weights. 
 
