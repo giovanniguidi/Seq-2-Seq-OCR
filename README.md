@@ -1,24 +1,24 @@
 ## Seq-2-Seq-OCR
 
-Handwritten text recognition using Seq-2-Seq modelling.
+Handwritten text recognition using Seq-2-Seq modelling with Keras.
 
 ## Data
 
 Download the dataset from 
-http://www.fki.inf.unibe.ch/databases/iam-handwriting-database
-
-(you need first to register). 
+http://www.fki.inf.unibe.ch/databases/iam-handwriting-database (you need first to register). 
 
 Put the IAM dataset "words" data into a "data" folder. 
 
 Folder structure should be data/a01 ... data/a02 and data/words.txt
 
 
-This is and example of the dataset:
+This is an example of images in the dataset:
 
 ![picture alt](https://github.com/giovanniguidi/Seq-2-Seq-OCR/blob/master/test_images/b01-049-01-00.png "")
 
 # Project structure
+
+The project follows this folder structure:
 
 base: base classes for data_generator, model, trainer and predictor
 
@@ -68,6 +68,7 @@ The graph and trained weights can be found at:
 
 https://drive.google.com/open?id=1Y_xJexxYcbU9eSd_poS_qKAW9eJg6Gbv
 
+If you want to use these weights be sure that you use the original labels in "datasets" folder, otherwise you may mix train and test set and you results will be unreliable.
 
 
 # Train
@@ -78,16 +79,18 @@ python3 main.py -c configs/config.yml --train
 
 If you set "weights_initialization" in config.yml you can use a pretrained model to inizialize the weights. 
 
-During training the best and last snapshots can be stored, if thos options are set in "callbacks" inside config.yml.
+During training the best and last snapshots can be stored if you set those options in "callbacks" in config.yml.
 
 
 # Inference 
 
-To predict on full test set run: 
+To predict on the full test set run: 
 
 python3 main.py -c configs/config.yml --predict_on_test
 
-To predict on a single image:
+(you need a file labels.json in "dataset").
+
+To predict on a single image run:
 
 python3 main.py -c configs/config.yml --predict --filename FILENAME
 
@@ -96,7 +99,7 @@ In "/test_images" there are some images that can be used for testing.
 
 ## Performance
 
-On test set:
+On the test set we get this performance (character error rate and word error rate):
 
 CER:  13.681 %
 
@@ -109,3 +112,8 @@ WER:  28.243 %
 
 
 # References
+
+
+\[1\] [Sequence to Sequence Learningwith Neural Networks](https://arxiv.org/pdf/1409.3215.pdf)
+
+\[2\] [A ten-minute introduction to sequence-to-sequence learning in Keras](https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html)
