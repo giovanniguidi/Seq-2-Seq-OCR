@@ -4,13 +4,12 @@ Handwritten text recognition using Seq-2-Seq modelling with Keras.
 
 ## Data
 
-Download the dataset from 
+Download the IAM dataset "words" (words/ and words.txt) from 
 http://www.fki.inf.unibe.ch/databases/iam-handwriting-database (you need first to register). 
 
-Put the IAM dataset "words" data into a "data" folder. 
+Put the "words" folder and words.txt file in "datasets". 
 
-Folder structure should be data/a01 ... data/a02 and data/words.txt
-
+Folder structure should be ./datasets/words/a01, ./datasets/words/a02, ... and ./dataset/words.txt.
 
 This is an example of images in the dataset:
 
@@ -18,25 +17,25 @@ This is an example of images in the dataset:
 
 # Project structure
 
-The project follows this folder structure:
+The project has this structure:
 
-base: base classes for data_generator, model, trainer and predictor
+base: base classes for data_generator, model, trainer and predictor that are extended
 
-callbacks: custom callbacks
+callbacks: custom callbacks (unused)
 
-configs: config file
+configs: configuration file
 
 data_generators: data generator class and data augmentation functions
 
-dataset: folder containing the dataset and labels
+dataset: folder containing the dataset and the labels
 
-experiments: folder that contained saved snapshots. They can be used for restoring the training 
+experiments: contains snapshots, that can be used for restoring the training 
 
-figures: contains plots and figures
+figures: plots and figures
 
-models: keras model
+models: neural network model
 
-notebooks: notebooks for testing code 
+notebooks: notebooks for testing 
 
 predictors: predictor class 
 
@@ -50,7 +49,7 @@ test_images: images from the dataset that can be used for testing
 
 traines: trainer classes
 
-utils: various utils including the script to generate ground truth labels
+utils: various utilities, including the one to generate the labels
 
 
 # Input
@@ -68,7 +67,7 @@ The graph and trained weights can be found at:
 
 https://drive.google.com/open?id=1Y_xJexxYcbU9eSd_poS_qKAW9eJg6Gbv
 
-If you want to use these weights be sure that you use the original labels in "datasets" folder, otherwise you may mix train and test set and you results will be unreliable.
+If you want to use these weights be sure that you use the original labels in "datasets" folder, otherwise you may mix the train and test set, and you results will be unreliable.
 
 
 # Train
@@ -94,7 +93,7 @@ To predict on a single image run:
 
 python3 main.py -c configs/config.yml --predict --filename FILENAME
 
-In "/test_images" there are some images that can be used for testing. 
+In "./test_images/" there are some images that can be used for fast testing. 
 
 
 ## Performance
@@ -114,6 +113,6 @@ WER:  28.243 %
 # References
 
 
-\[1\] [Sequence to Sequence Learningwith Neural Networks](https://arxiv.org/pdf/1409.3215.pdf)
+\[1\] [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/pdf/1409.3215.pdf)
 
 \[2\] [A ten-minute introduction to sequence-to-sequence learning in Keras](https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html)
