@@ -76,9 +76,8 @@ Each split gives a list of dictionary: {'filename': FILENAME, 'label': LABEL}.
 
 The graph and trained weights can be found at:
 
-```
 https://drive.google.com/open?id=1Y_xJexxYcbU9eSd_poS_qKAW9eJg6Gbv
-```
+
 
 If you want to use these weights be sure that you use the original labels in "datasets" folder, otherwise you may mix the train and test set, and you results will be unreliable.
 
@@ -121,7 +120,6 @@ On the test set we get this performance (character error rate and word error rat
 
 ```
 CER:  13.681 %
-
 WER:  28.243 %
 ```
 
