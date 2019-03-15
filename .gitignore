@@ -3,7 +3,7 @@
 *.pyc
 */*.pyc
 */**/__pycache__/*
-datasets/*
+datasets/words*
 old/
 snapshots/*
 experiments/*
