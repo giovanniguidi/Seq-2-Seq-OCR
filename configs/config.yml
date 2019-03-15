@@ -9,13 +9,13 @@ image:
     convert_to_grayscale: false
 train:    
     train_on_subset: 
-        enabled: true
+        enabled: false
         random_seed: 33
         dataset_fraction: 0.8   
     optimizer: "adam"      #adam, adagrad, adadelta, rmsprop, sgd
     learning_rate: 0.001  
     batch_size: 256   
-    num_epochs: 10
+    num_epochs: 50
     use_multiprocessing: false
     num_workers: 1
     weights_initialization: 

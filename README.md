@@ -14,6 +14,8 @@ Put the IAM dataset "words" data into a "data" folder.
 Folder structure should be data/a01 ... data/a02 and data/words.txt
 
 
+![picture alt](http://www.brightlightpictures.com/assets/images/portfolio/thethaw_header.jpg "Title is optional")
+
 # Project structure
 
 base: base classes for data_generator, model, trainer and predictor
@@ -102,3 +104,6 @@ WER:  28.243 %
 # To do
 
 - [x] Document code following Docstring conventions
+
+
+# References
