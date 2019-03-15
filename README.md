@@ -83,8 +83,6 @@ If you want to use these weights be sure that you use the original labels in "da
 
 To train a model run:
 
-Explain what these tests test and why
-
 ```
 python3 main.py -c configs/config.yml --train
 ```
@@ -98,13 +96,17 @@ During training the best and last snapshots can be stored if you set those optio
 
 To predict on the full test set run: 
 
+```
 python3 main.py -c configs/config.yml --predict_on_test
+```
 
 (you need a file labels.json in "dataset").
 
 To predict on a single image run:
 
+```
 python3 main.py -c configs/config.yml --predict --filename FILENAME
+```
 
 In "./test_images/" there are some images that can be used for fast testing. 
 
