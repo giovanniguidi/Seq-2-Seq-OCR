@@ -79,7 +79,7 @@ Each split gives a list of dictionary: {'filename': FILENAME, 'label': LABEL}.
 
 The graph and trained weights can be found at:
 
-https://drive.google.com/open?id=1Y_xJexxYcbU9eSd_poS_qKAW9eJg6Gbv
+https://drive.google.com/open?id=1JXfM5X0aihv2d_4WN8_bIvzrfhB0Me5k
 
 
 If you want to use these weights be sure that you keep the original dataset split (use the original labels.json in "datasets"), otherwise you may mix the train and test set and you results will be unreliable.
@@ -122,13 +122,13 @@ In "./test_images/" there are some images that can be used for fast testing.
 On the test set we get this performance (character error rate and word error rate):
 
 ```
-CER:  13.681 %
-WER:  28.243 %
+CER:  12.62 %
+WER:  26.65 %
 ```
 
 ## To do
 
-- [x] Document code following Docstring conventions
+- [x] Train with data augmentation to increase the performance
 
 
 ## References
