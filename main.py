@@ -84,11 +84,10 @@ def predict_on_test(args):
    
     pred_test = predictor.predict(images_test)
 
-    WER, CER = score_prediction(labels_test, pred_test)
+    CER, WER  = score_prediction(labels_test, pred_test)
     
-    for i in range(20):
-        print(labels_test[i], pred_test[i])
-    
+#    for i in range(20):
+#        print(labels_test[i], pred_test[i])
     
     print('CER: ', round(CER * 100, 2), '%')
     print('WER: ', round(WER * 100, 2), '%')

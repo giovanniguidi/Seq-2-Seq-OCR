@@ -245,8 +245,13 @@ class PredictorSeq2Seq(BasePredictor):
             sentence = []
             for j in range(full_seq.shape[1]):
                 sampled_token_index = np.argmax(full_seq[i, j, :])   
-                sentence.append(reverse_token_indices[sampled_token_index])
-
-            decoded_sentences.append(''.join(sentence).replace("]", ""))  
+                
+                decoded_elem = reverse_token_indices[sampled_token_index]
+                if decoded_elem == ']':
+                    break
+                else:
+                    sentence.append(reverse_token_indices[sampled_token_index])
+                
+            decoded_sentences.append(''.join(sentence))  
 
         return decoded_sentences
