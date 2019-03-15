@@ -2,6 +2,13 @@
 
 Handwritten text recognition using Seq-2-Seq modelling with Keras.
 
+This model is based on Sequence-To-Sequence modelling, initially introduced for machine translation:
+
+![picture alt](https://github.com/giovanniguidi/Seq-2-Seq-OCR/blob/master/figures/seq2seq.png "")
+
+In our case the "sequences" are the images from the IAM dataset, that contain handwritten words. 
+
+A convolutional neural network extracts the features from the images at different locations, depending on the receptive field of the final neurons. Those features are flattened and encoded by an LSTM. The decoder (another LSTM) predicts the labels (i.e. the words) using as initial states the output of the encoder.
 
 
 ## Data
@@ -17,7 +24,7 @@ This is an example of images in the dataset:
 
 ![picture alt](https://github.com/giovanniguidi/Seq-2-Seq-OCR/blob/master/test_images/b01-049-01-00.png "")
 
-# Project structure
+## Project structure
 
 The project has this structure:
 
@@ -54,7 +61,7 @@ traines: trainer classes
 utils: various utilities, including the one to generate the labels
 
 
-# Input
+## Input
 
 The input json can be created from utils/create_labels.py and follows this structure:
 
@@ -72,7 +79,7 @@ https://drive.google.com/open?id=1Y_xJexxYcbU9eSd_poS_qKAW9eJg6Gbv
 If you want to use these weights be sure that you use the original labels in "datasets" folder, otherwise you may mix the train and test set, and you results will be unreliable.
 
 
-# Train
+## Train
 
 To train a model run:
 
@@ -83,7 +90,7 @@ If you set "weights_initialization" in config.yml you can use a pretrained model
 During training the best and last snapshots can be stored if you set those options in "callbacks" in config.yml.
 
 
-# Inference 
+## Inference 
 
 To predict on the full test set run: 
 
@@ -107,12 +114,12 @@ CER:  13.681 %
 WER:  28.243 %
 
 
-# To do
+## To do
 
 - [x] Document code following Docstring conventions
 
 
-# References
+## References
 
 
 \[1\] [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/pdf/1409.3215.pdf)
