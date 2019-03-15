@@ -20,11 +20,49 @@ from preprocessing.preproc_functions import read_image_BW, normalize_0_mean_1_va
 from base.base_predictor import BasePredictor
 
 class PredictorSeq2Seq(BasePredictor):
-    def __init__(self, config, graph_path, weights_path, num_decoder_tokens, max_decoder_seq_length,
+    """
+    Class for prediction
+
+    Attributes
+    ----------
+    num_decoder_tokens : int
+        configuration file 
+    max_seq_length : int
+        configuration file 
+    token_indices : dict
+        dict {token: index} 
+    reverse_token_indices : dict
+        dict {index: token} 
+    batch_size : int
+        batch size for prediction
+    model : keras.models
+        keras model 
+    encoder_graph : keras.models
+        encoder graph of the keras model 
+    decoder_graph : keras.models
+        decoder graph of the keras model
+
+    Methods
+    -------
+    load_model(graph_path, weights_path)
+        load a keras model from graph and weights
+    build_graphs()   
+        create the computational graphs (encoder, decoder)
+    predict(images)
+        predict labels given an array of images
+    decode_sequence(input_seq, batch_dim, num_decoder_tokens, max_decoder_seq_length, 
+                    token_indices, reverse_token_indices)    
+        decode a sequence after encoding
+    """
+    
+    def __init__(self, config, graph_path, weights_path, num_decoder_tokens, max_seq_length,
                 token_indices, reverse_token_indices, batch_size = 64):
+        """
+        Constructor
+        """
         super().__init__(config)
         self.num_decoder_tokens = num_decoder_tokens
-        self.max_decoder_seq_length = max_decoder_seq_length
+        self.max_seq_length = max_seq_length
         self.token_indices = token_indices
         self.reverse_token_indices = reverse_token_indices
         self.batch_size = batch_size
@@ -39,6 +77,21 @@ class PredictorSeq2Seq(BasePredictor):
   #      self.init_callbacks()
 
     def load_model(self, graph_path, weights_path):
+        """Load a keras model from graph and weights
+
+        Parameters
+        ------
+        graph_path: srt
+            path to the graph
+        weights_path: str
+            path to the weights
+            
+        Returns
+        -------
+        model: keras.models
+            keras model
+        """
+        
         json_file = open(graph_path, 'r')
         loaded_model_json = json_file.read()
         json_file.close()
@@ -49,8 +102,17 @@ class PredictorSeq2Seq(BasePredictor):
         
         return model
     
-    def build_graphs(self):        
-        
+    def build_graphs(self):     
+        """Create the computational graphs (encoder, decoder)
+            
+        Returns
+        -------
+        encoder_graph: keras.models
+            keras model of the encoder            
+        decoder_graph: keras.models
+            keras model of the encoder
+        """
+
         latent_dim = self.config['network']['latent_dim']
         
         # Define inference models 
@@ -80,7 +142,19 @@ class PredictorSeq2Seq(BasePredictor):
         return encoder_graph, decoder_graph
     
     def predict(self, images):
-     
+        """Predict labels given an array of images
+        
+        Parameters
+        ------
+        images: numpy array
+            images array
+            
+        Returns
+        -------
+        flattened_list: list
+            list with predicted labels
+        """ 
+    
         batch_size = self.batch_size
         
         n_images = images.shape[0]
@@ -102,7 +176,7 @@ class PredictorSeq2Seq(BasePredictor):
             input_seq = images[batch_in:batch_out, :, :, :]
             batch_dim = batch_out - batch_in
             decoded_sentences = self.decode_sequence(input_seq, batch_dim, self.num_decoder_tokens, 
-                                              self.max_decoder_seq_length,
+                                              self.max_seq_length,
                                               self.token_indices,
                                               self.reverse_token_indices)
 
@@ -113,7 +187,30 @@ class PredictorSeq2Seq(BasePredictor):
 
         return flattened_list
     
-    def decode_sequence(self, input_seq, batch_dim, num_decoder_tokens, max_decoder_seq_length, token_indices, reverse_token_indices):
+    def decode_sequence(self, input_seq, batch_dim, num_decoder_tokens, max_seq_length, token_indices, reverse_token_indices):
+        """Decode a batch of images
+        
+        Parameters
+        ------
+        input_seq: numpy array
+            batch of images
+        batch_dim: int
+            dimension of batch in prediction        
+        num_decoder_tokens: int
+            total number of tokens
+        max_seq_length: int
+            max length of sequences                      
+        token_indices: dict
+            dict {token: index}            
+        reverse_token_indices: dict
+            dict {index: token}
+            
+        Returns
+        -------
+        decoded_sentences: list
+            list with predicted of the batch
+        """ 
+            
         # Encode the input as state vectors.
         states_value = self.encoder_graph.predict(input_seq, batch_size = batch_dim)
 
@@ -123,7 +220,7 @@ class PredictorSeq2Seq(BasePredictor):
         # Populate the first character of target sequence with the start character.
         target_seq[:, token_indices['[']] = 1.
 
-        for i in range(max_decoder_seq_length):
+        for i in range(max_seq_length):
             output_tokens, h, c = self.decoder_graph.predict([np.expand_dims(target_seq, axis=1)] + states_value, 
                                                             batch_size = batch_dim )
 

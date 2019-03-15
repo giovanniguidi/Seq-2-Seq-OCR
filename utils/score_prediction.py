@@ -2,6 +2,24 @@ from nltk.metrics.distance import edit_distance
 import numpy as np
 
 def score_prediction(y_true, y_pred):
+    """Function to score prediction on IAM, using Levenshtein distance
+       to calculate character error rate (CER)
+    
+    Parameters
+    ------
+    y_true: list
+        list of ground truth labels
+    y_pred: list
+        list of predicted labels
+
+    Returns
+    -------
+    CER: float
+        character error rate
+    WER: float
+        word error rate
+    """
+        
     words_identified = 0
     characters_identified = 0
     char_tot = 0

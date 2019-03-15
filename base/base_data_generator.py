@@ -53,7 +53,7 @@ class BaseDataGenerator(keras.utils.Sequence):
         self.use_data_aug = use_data_augmentation
         
     def __len__(self):
-        """Returns the length of the dataset
+        """Gives the number of batches per epoch
         
         Raises
         ------

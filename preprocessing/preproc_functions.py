@@ -3,7 +3,25 @@ import cv2
 import numpy as np
 
 def read_image_BW(images_folder, filename, y_size, x_size):
-  
+    """Function to read images in black and white
+
+    Parameters
+    ------
+    images_folder : dict
+        folder containing the images
+    filename : str
+        filename
+    y_size : int
+        image height
+    x_size : int
+        image width
+        
+    Returns
+    -------
+    img: numpy array
+        image
+    """  
+
     fpath = os.path.join(images_folder, filename)
     img = cv2.imread(fpath, 0)
     
@@ -37,6 +55,24 @@ def read_image_BW_old(images_folder, filename, y_size, x_size):
     return img 
 
 def read_image_color(images_folder, filename, y_size, x_size):
+    """Function to read images in color
+
+    Parameters
+    ------
+    images_folder : dict
+        folder containing the images
+    filename : str
+        filename
+    y_size : int
+        image height
+    x_size : int
+        image width
+        
+    Returns
+    -------
+    img: numpy array
+        image
+    """  
   
     fpath = os.path.join(images_folder, filename)
     img = cv2.imread(fpath)
@@ -67,7 +103,24 @@ def read_image_color_old(images_folder, filename, y_size, x_size):
     return img 
 
 def normalize_0_mean_1_variance_BW(img, y_size, x_size):
+    """Function to normalize black and white images images to 
+       mean = 0 and variance = 1
 
+    Parameters
+    ------
+    img : numpy array
+        image array
+    y_size : int
+        image height
+    x_size : int
+        image width
+        
+    Returns
+    -------
+    img: numpy array
+        normalized image
+    """  
+        
     # normalize
     (m, s) = cv2.meanStdDev(img)
     m = m[0][0]
@@ -80,6 +133,23 @@ def normalize_0_mean_1_variance_BW(img, y_size, x_size):
     return img
 
 def normalize_0_mean_1_variance_color(img, y_size, x_size):
+    """Function to normalize color images images to 
+       mean = 0 and variance = 1
+
+    Parameters
+    ------
+    img : numpy array
+        image array
+    y_size : int
+        image height
+    x_size : int
+        image width
+        
+    Returns
+    -------
+    img: numpy array
+        normalized image
+    """  
 
     # normalize
     (m, s) = cv2.meanStdDev(img)
@@ -96,6 +166,18 @@ def normalize_0_mean_1_variance_color(img, y_size, x_size):
 
 
 def normalize_0_1(img):
+    """Function to normalize black and white images images in [0, 1]
+
+    Parameters
+    ------
+    img : numpy array
+        image array
+
+    Returns
+    -------
+    img: numpy array
+        normalized image
+    """  
 
     img /= 255. 
 #    img = np.reshape(img, (y_size, x_size, num_channels))

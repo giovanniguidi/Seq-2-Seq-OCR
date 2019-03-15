@@ -2,6 +2,25 @@ import json
 from sklearn.model_selection import train_test_split
 
 def create_gt(data_folder, test_size, val_size, random_state):
+    """Function to split the IAM dataset in train/val/test and 
+        create a json with labels 
+
+    Parameters
+    ------
+    data_folder: str
+        base folder with IAM images 
+    test_size: float
+        size of the test set
+    val_size: val_size
+        size of the val set
+    random_state: int
+        random seed for splitting
+        
+    Returns
+    -------
+    dataset_out: dict
+        dictionary containing dataset['train'], ['val'], ['test']
+    """
 
 #    maxTextLen = 50
 

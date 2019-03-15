@@ -10,6 +10,9 @@ In our case the "sequences" are the images from the IAM dataset, that contain ha
 
 A convolutional neural network extracts the features from the images at different locations, depending on the receptive field of the final neurons. Those features are flattened and encoded by an LSTM. The decoder (another LSTM) predicts the labels (i.e. the words) using as initial states the output of the encoder.
 
+## Requirements
+
+Check requirements.txt to install the dependencies.
 
 ## Data
 
@@ -28,7 +31,7 @@ This is an example of images in the dataset:
 
 The project has this structure:
 
-- base: base classes for data_generator, model, trainer and predictor that are extended
+- base: base classes for data_generator, model, trainer and predictor 
 
 - callbacks: custom callbacks (unused)
 
@@ -79,7 +82,7 @@ The graph and trained weights can be found at:
 https://drive.google.com/open?id=1Y_xJexxYcbU9eSd_poS_qKAW9eJg6Gbv
 
 
-If you want to use these weights be sure that you use the original labels in "datasets" folder, otherwise you may mix the train and test set, and you results will be unreliable.
+If you want to use these weights be sure that you keep the original dataset split (use the original labels.json in "datasets"), otherwise you may mix the train and test set and you results will be unreliable.
 
 
 ## Train

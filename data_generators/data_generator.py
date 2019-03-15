@@ -12,23 +12,74 @@ from preprocessing.preproc_functions import read_image_BW, read_image_color, nor
 
 
 class DataGenerator(BaseDataGenerator):
+    """
+    Class that implement data generation
+
+    Attributes
+    ----------    
+    decoder_tokens : list
+        tokens that can be produced by the decoder 
+    num_decoder_tokens : list 
+        total number of tokens
+    max_seq_length : int
+        maximum length of the sequence
+    token_indices : dict
+        dict {token: index}
+    reverse_token_indices : dict
+        {index: token}
+    indices : np.arrray
+        indices of the array
+
+    Methods
+    -------
+    __len__()
+        returns the length of the dataset 
+    __getitem__(index)
+        returns a batch of data
+    on_epoch_end()
+        function called when finishing an epoch
+    data_generation(dataset_temp)     
+        read and normalize images of the batch 
+    """
+    
     def __init__(self, config, dataset, shuffle=True, use_data_augmentation=False):
-        super().__init__(config, dataset, shuffle, use_data_augmentation) 
+        """
+        Constructor
+        """
         
-#        self.decoder_tokens = sorted(string.ascii_uppercase + string.digits + '[]' )    
+        super().__init__(config, dataset, shuffle, use_data_augmentation) 
         self.decoder_tokens = sorted(string.printable)  
         self.num_decoder_tokens = len(self.decoder_tokens)
-#        self.max_decoder_seq_length = self.get_decoder_seq_length()
         self.max_seq_length = self.config['network']['max_seq_lenght']
         self.token_indices, self.reverse_token_indices = self.token_indices()
         self.indices = np.arange(self.dataset_len)
 
     def __len__(self):
-        'Denotes the number of batches per epoch'
+        """Gives the number of batches per epoch
+        
+        Returns
+        -------
+        len: int
+            number of batches in an epoch
+        """
+        
         return int(np.floor(self.dataset_len / self.batch_size))
 
     def __getitem__(self, index):
-        'Generate one batch of data'
+        """Returns a batch of data
+
+        Parameters
+        ------
+        index: int
+            index of the batch
+        
+        Returns
+        -------
+        X, y1, y2: numpy array
+            image preprocessed, input of the decoder (in teacher forcing configuration) and 
+            output of the decoder
+        """
+        
         # Generate indexes of the batch
         indices = self.indices[index*self.batch_size:(index+1)*self.batch_size]
 
@@ -41,27 +92,32 @@ class DataGenerator(BaseDataGenerator):
         return [X, y1], y2
 
     def on_epoch_end(self):
-        'Updates indexes after each epoch'
+        """
+        Updates indexes after each epoch 
+        """
+        
         if self.shuffle == True:
             np.random.shuffle(self.indices)
-       #print('reshuffling data')
 
     def get_full_dataset(self):
+        """
+        Returns the dataset preprocessed and the labels 
+        
+        Returns
+        -------
+        dataset_images, dataset_labels: numpy array
+            images preprocessed, and labels
+        """
         
         dataset_images = []
         dataset_labels = []
         
         for elem in self.dataset:
-#            normalized_image = self.preprocess_image(elem['filename'])
-        
             y_size = self.config['image']['image_size']['y_size']
             x_size = self.config['image']['image_size']['x_size']
             num_channels = self.config['image']['image_size']['num_channels']
             convert_to_grayscale = self.config['image']['convert_to_grayscale']
-            
-#            image = read_image_BW(images_folder, elem['filename'], y_size, x_size)
-            
-#            print(self.images_folder, elem['filename'])
+
             #read image
             if num_channels == 1 or (num_channels == 3 and convert_to_grayscale):
                 image = read_image_BW(self.images_folder, elem['filename'], y_size, x_size)
@@ -83,23 +139,29 @@ class DataGenerator(BaseDataGenerator):
 
         
     def data_generation(self, dataset_temp):        
+        """Read and normalize images of the batch 
+
+        Parameters
+        ------
+        dataset_temp: list
+            list of IDs of the elements in the batch
+            
+        Returns
+        -------
+        batch_x, batch_y1, batch_y2: numpy array
+            batch of images preprocessed, input of the decoder and output of the decoder
+        """
+        
         batch_x = []
         batch_y1 = []
         batch_y2 = []
 
         for elem in dataset_temp:            
-            #image = self.read_image(elem['filename'])
-
             y_size = self.config['image']['image_size']['y_size']
             x_size = self.config['image']['image_size']['x_size']
             num_channels = self.config['image']['image_size']['num_channels']
             convert_to_grayscale = self.config['image']['convert_to_grayscale']
-            
-            #images_folder = self.config['images_folder']
-            #print(os.path.join(self.images_folder, elem['filename']))
-            #image = read_image_BW(self.images_folder, elem['filename'], y_size, x_size)
-            #print(image.shape)
-            
+                       
             #read image, apply data augmentation and normalize
             if num_channels == 1 or (num_channels == 3 and convert_to_grayscale):
                 image = read_image_BW(self.images_folder, elem['filename'], y_size, x_size)
@@ -143,6 +205,14 @@ class DataGenerator(BaseDataGenerator):
 #        return max_decoder_seq_length
     
     def token_indices(self):
+        """
+        Generate dictionaries {token: index} and {index: token} 
+        
+        Returns
+        -------
+        target_token_index, reverse_target_token_index: dict
+            dicts {token: index} and {index: token} 
+        """
 
         target_token_index = dict((k, v) for v, k in enumerate(self.decoder_tokens))
         reverse_target_token_index = dict((i, char) for char, i in target_token_index.items())
@@ -150,7 +220,25 @@ class DataGenerator(BaseDataGenerator):
         return target_token_index, reverse_target_token_index
     
     def one_hot_labels(self, label, max_seq_length, num_decoder_tokens, target_token_index):
+        """Convert labels in matrices [seq_length, num_tokens] in which "num_tokens" axis is one-hot
 
+        Parameters
+        ------
+        label: str
+            input label
+        max_seq_length: int
+            max length of sequences
+        num_decoder_tokens: int
+            total number of tokens
+        target_token_index: dict
+            dictionary {token: index}
+            
+        Returns
+        -------
+        decoder_input_data, decoder_target_data : numpy arrays
+            matrices of labels one-hot
+        """
+        
         decoder_input_data = np.zeros((max_seq_length, num_decoder_tokens), dtype='float32')
         decoder_target_data = np.zeros((max_seq_length, num_decoder_tokens), dtype='float32')
                     
@@ -158,19 +246,11 @@ class DataGenerator(BaseDataGenerator):
         for t, char in enumerate('[' + label):
             if t < max_seq_length:
                 decoder_input_data[t, target_token_index[char]] = 1.
-#            if t == 0:
-#                decoder_input_data[t, target_token_index['[']] = 1.
-#            elif t > 0 and t < max_seq_length:
-#                decoder_input_data[t, target_token_index[char]] = 1.
 
         #generate one hot label for output decoder
         for t, char in enumerate(label + ']'):
             if t < max_seq_length:
                 decoder_target_data[t, target_token_index[char]] = 1.           
-#            if t < max_seq_length - 1:
-#                decoder_target_data[t, target_token_index[char]] = 1.
-#            elif t == max_seq_length - 1:
-#                decoder_target_data[t, target_token_index[']']] = 1.
                                    
         return decoder_input_data, decoder_target_data    
     

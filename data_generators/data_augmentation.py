@@ -1,24 +1,24 @@
 import os
-#import pandas as pd
 import numpy as np
 import cv2
-#from PIL import Image
 import random
-#import tensorflow as tf
-#import re
-#import datetime
 import io
-#from sklearn.model_selection import train_test_split
-#from matplotlib import pyplot as plt
-#import pickle
-#import string
-#from utils import score_prediction, generate_token_index, y_labels, generate_dataset
-#import json
-#import keras
-#import string
 
 
 def data_aug_functions(img, config):
+    """Function to augment data
+
+    Parameters
+    ------
+    config: dict
+        configuration file
+        
+    Returns
+    -------
+    img: numpy array
+        augmented image
+    """
+
     #print('data aug')
     
     y_size = config['image']['image_size']['y_size']
@@ -44,6 +44,28 @@ def data_aug_functions(img, config):
     return img_aug
 
 def flip(img, horizontal_flip, vertical_flip, y_size, x_size, num_channels):
+    """Function to flip images horizontally and vertically with prob = 0.5 
+
+    Parameters
+    ------
+    img: numpy array
+        configuration file
+    horizontal_flip: bool
+        configuration file
+    vertical_flip: bool
+        configuration file
+    y_size: int
+        image height
+    x_size: int
+        image width
+    num_channels: int
+        number of channels
+        
+    Returns
+    -------
+    img: numpy array
+        flipped image
+    """
 
     img_flipped = img
 
@@ -58,9 +80,29 @@ def flip(img, horizontal_flip, vertical_flip, y_size, x_size, num_channels):
 
 
 def translation(img, width_shift_range, height_shift_range, y_size, x_size, num_channels):
+    """Function to translate images randomly between [-width_shift_range, width_shift_range]
+       and [-width_shift_range, width_shift_range]
 
-  #  rows = y_size
-  #  cols = x_size
+    Parameters
+    ------
+    img: numpy array
+        configuration file
+    width_shift_range: float
+        maximum x shift range
+    height_shift_range: float
+        maximum y shift range
+    y_size: int
+        image height
+    x_size: int
+        image width
+    num_channels: int
+        number of channels
+        
+    Returns
+    -------
+    img: numpy array
+        translated image
+    """
 
     y_shift = np.random.uniform(-height_shift_range, height_shift_range) * y_size
     x_shift = np.random.uniform(-width_shift_range, width_shift_range) * x_size
@@ -72,11 +114,28 @@ def translation(img, width_shift_range, height_shift_range, y_size, x_size, num_
 
 
 def rotation(img, rotation_range, y_size, x_size, num_channels):
-    angle = np.random.uniform(-rotation_range, rotation_range)
+    """Function to rotate images randomly between [-rotation_range, rotation_range]
 
-    #print(img.shape)
-#    rows = self.y_size
-#    cols = self.x_size
+    Parameters
+    ------
+    img: numpy array
+        configuration file
+    rotation_range: float
+        maximum rotation range
+    y_size: int
+        image height
+    x_size: int
+        image width
+    num_channels: int
+        number of channels
+        
+    Returns
+    -------
+    img: numpy array
+        rotated image
+    """
+    
+    angle = np.random.uniform(-rotation_range, rotation_range)
 
     M = cv2.getRotationMatrix2D((x_size/2, y_size/2), angle, 1)
     img_rot = cv2.warpAffine(img, M, (x_size, y_size))
@@ -88,16 +147,32 @@ def rotation(img, rotation_range, y_size, x_size, num_channels):
 
 
 def zoom(img, zoom_range, y_size, x_size, num_channels):
-#    rows = self.y_size
-#    cols = self.x_size
+    """Function to zoom images randomly between [-zoom_range, zoom_range]
 
+    Parameters
+    ------
+    img: numpy array
+        configuration file
+    zoom_range: float
+        maximum zoom range
+    y_size: int
+        image height
+    x_size: int
+        image width
+    num_channels: int
+        number of channels
+        
+    Returns
+    -------
+    img: numpy array
+        zoomed image
+    """
+    
     zoom = np.random.uniform(zoom_range[0], zoom_range[1]) 
 
     p1 = [5, 5] 
     p2 = [20, 5]
     p3 = [5, 20]
-
-#        [5,5],[20,5],[5,20]
 
     pts1 = np.float32([p1, p2, p3])
     pts2 = np.float32([[x * zoom for x in p1], 
@@ -110,9 +185,27 @@ def zoom(img, zoom_range, y_size, x_size, num_channels):
     return zoomed_image
 
 def shear(img, shear_range, y_size, x_size, num_channels):
- #   rows = self.y_size
- #   cols = self.x_size
+    """Function to shear images randomly between [-shear_range, shear_range]
 
+    Parameters
+    ------
+    img: numpy array
+        configuration file
+    shear_range: float
+        maximum shear range
+    y_size: int
+        image height
+    x_size: int
+        image width
+    num_channels: int
+        number of channels
+        
+    Returns
+    -------
+    img: numpy array
+        sheared image
+    """
+    
     pts1 = np.float32([[5,5],[20,5],[5,20]])
     pt1 = 5 + shear_range*np.random.uniform() - shear_range/2
     pt2 = 20 + shear_range*np.random.uniform() - shear_range/2

@@ -37,6 +37,7 @@ class BaseTrain(object):
         ------
         NotImplementedError
         """
+        
         raise NotImplementedError
 
     def save_model(self, model, graph_path, weights_path):
@@ -55,4 +56,5 @@ class BaseTrain(object):
         ------
         NotImplementedError
         """
+        
         raise NotImplementedError

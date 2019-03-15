@@ -14,10 +14,14 @@ from preprocessing.preproc_functions import read_image_BW, normalize_0_mean_1_va
 
 
 def train(args):
+    """
+    Train a model on the train set defined in labels.json
+    """
+    
     config_path = args.conf
 
     with open(config_path) as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.FullLoader)
     
     with open(config['labels_file']) as f:
         dataset = json.load(f)
@@ -51,10 +55,14 @@ def train(args):
 
     
 def predict_on_test(args):
+    """
+    Predict on the test set defined in labels.json
+    """
+        
     config_path = args.conf
     
     with open(config_path) as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.FullLoader)
         
     with open(config['labels_file']) as f:
         dataset = json.load(f)
@@ -78,17 +86,25 @@ def predict_on_test(args):
 
     WER, CER = score_prediction(labels_test, pred_test)
     
+    for i in range(20):
+        print(labels_test[i], pred_test[i])
+    
+    
     print('CER: ', round(CER * 100, 2), '%')
     print('WER: ', round(WER * 100, 2), '%')
     
 
 def predict(args):
+    """
+    Predict on a single image 
+    """
+        
     config_path = args.conf
 
     filename = args.filename
     
     with open(config_path) as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.FullLoader)
         
     with open(config['labels_file']) as f:
         dataset = json.load(f)

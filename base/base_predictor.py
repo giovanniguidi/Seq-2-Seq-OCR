@@ -38,6 +38,7 @@ class BasePredictor(object):
         ------
         NotImplementedError
         """
+        
         raise NotImplementedError
         
     def load_model(self, graph_path, weights_path):
@@ -54,4 +55,5 @@ class BasePredictor(object):
         ------
         NotImplementedError
         """
+        
         raise NotImplementedError

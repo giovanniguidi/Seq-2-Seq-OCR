@@ -19,8 +19,31 @@ from base.base_trainer import BaseTrain
 
 
 class TrainerSeq2Seq(BaseTrain):
+    """
+    Base class for the keras "model"
+
+    Attributes
+    ----------
+    epochs : int
+        number of epochs to train
+    callbacks_list : list
+        list with callbacks during training
+
+    Methods
+    -------
+    callbacks()
+        create the callback list
+    train()
+        train a model
+    save_model()
+        save model weights
+    """
+    
+    
     def __init__(self, config, model, train_generator, val_generator):
-#        super(SimpleMnistModelTrainer, self).__init__(model, data, config)
+        """
+        Constructor
+        """
         super().__init__(config, model, train_generator, train_generator)
 
         self.epochs = self.config['train']['num_epochs']
@@ -32,6 +55,14 @@ class TrainerSeq2Seq(BaseTrain):
   #      self.init_callbacks()
 
     def callbacks(self):
+        """Create the callback list
+
+        Returns
+        -------
+        callbacks : list
+            callback list
+        """
+        
         callbacks = []
 
         #early stopping
@@ -70,6 +101,9 @@ class TrainerSeq2Seq(BaseTrain):
 
                              
     def train(self):
+        """
+        Train a model
+        """
 
         #initialize weights
         if self.config['train']['weights_initialization']['use_pretrained_weights'] == True:
@@ -96,6 +130,17 @@ class TrainerSeq2Seq(BaseTrain):
         
         
     def save_model(self, model, graph_path, weights_path):
+        """Function to save a model graph and weights 
+
+        Parameters
+        ------
+        model : keras.models
+            keras model to save
+        graph_path : keras.models
+            path to save graph
+        weights_path : keras.models
+            path to save weights
+        """
                    
         model_json = model.to_json()
         with open(graph_path, "w") as json_file:

@@ -2,7 +2,7 @@ from keras.optimizers import Adam, SGD, RMSprop, Adagrad, Adadelta
 
 class BaseModel(object):
     """
-    Base class for the keras "model"
+    Base class for the keras model
 
     Attributes
     ----------
@@ -41,6 +41,7 @@ class BaseModel(object):
         ------
         NotImplementedError
         """
+        
         raise NotImplementedError
 
     def build_graph(self):
@@ -50,6 +51,7 @@ class BaseModel(object):
         ------
         NotImplementedError
         """
+        
         raise NotImplementedError
 
     def set_optimizer(self, optimizer_name, lr):
@@ -64,7 +66,7 @@ class BaseModel(object):
             
         Raises
         ------
-        NotImplementedError
+        Exception
         """
                 
         if optimizer_name == 'adam':
