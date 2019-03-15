@@ -2,7 +2,7 @@
 
 Handwritten text recognition using Seq-2-Seq modelling with Keras.
 
-This model is based on Sequence-To-Sequence modelling, initially introduced for machine translation:
+This project is based on Sequence-To-Sequence modelling, initially introduced for machine translation by https://arxiv.org/pdf/1409.3215.pdf:
 
 ![picture alt](https://github.com/giovanniguidi/Seq-2-Seq-OCR/blob/master/figures/seq2seq.png "")
 
