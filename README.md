@@ -1,4 +1,4 @@
-## Seq-2-Seq-OCR
+# Seq-2-Seq-OCR
 
 Handwritten text recognition using Seq-2-Seq modelling with Keras.
 
@@ -28,37 +28,37 @@ This is an example of images in the dataset:
 
 The project has this structure:
 
-base: base classes for data_generator, model, trainer and predictor that are extended
+- base: base classes for data_generator, model, trainer and predictor that are extended
 
-callbacks: custom callbacks (unused)
+- callbacks: custom callbacks (unused)
 
-configs: configuration file
+- configs: configuration file
 
-data_generators: data generator class and data augmentation functions
+- data_generators: data generator class and data augmentation functions
 
-dataset: folder containing the dataset and the labels
+- dataset: folder containing the dataset and the labels
 
-experiments: contains snapshots, that can be used for restoring the training 
+- experiments: contains snapshots, that can be used for restoring the training 
 
-figures: plots and figures
+- figures: plots and figures
 
-models: neural network model
+- models: neural network model
 
-notebooks: notebooks for testing 
+- notebooks: notebooks for testing 
 
-predictors: predictor class 
+- predictors: predictor class 
 
-preprocessing: preprocessing functions (reading and normalizing the image)
+- preprocessing: preprocessing functions (reading and normalizing the image)
 
-snapshots: graph and weights of the trained model
+- snapshots: graph and weights of the trained model
 
-tensorboard: tensorboard logs
+- tensorboard: tensorboard logs
 
-test_images: images from the dataset that can be used for testing 
+- test_images: images from the dataset that can be used for testing 
 
-traines: trainer classes
+- traines: trainer classes
 
-utils: various utilities, including the one to generate the labels
+- utils: various utilities, including the one to generate the labels
 
 
 ## Input
@@ -84,7 +84,7 @@ If you want to use these weights be sure that you use the original labels in "da
 To train a model run:
 
 ```
-python3 main.py -c configs/config.yml --train
+python main.py -c configs/config.yml --train
 ```
 
 If you set "weights_initialization" in config.yml you can use a pretrained model to inizialize the weights. 
@@ -97,7 +97,7 @@ During training the best and last snapshots can be stored if you set those optio
 To predict on the full test set run: 
 
 ```
-python3 main.py -c configs/config.yml --predict_on_test
+python main.py -c configs/config.yml --predict_on_test
 ```
 
 (you need a file labels.json in "dataset").
@@ -105,7 +105,7 @@ python3 main.py -c configs/config.yml --predict_on_test
 To predict on a single image run:
 
 ```
-python3 main.py -c configs/config.yml --predict --filename FILENAME
+python main.py -c configs/config.yml --predict --filename FILENAME
 ```
 
 In "./test_images/" there are some images that can be used for fast testing. 
