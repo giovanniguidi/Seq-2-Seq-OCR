@@ -13,6 +13,9 @@ A convolutional neural network extracts the features from the images at differen
 ## Requirements
 
 Check requirements.txt to install the dependencies.
+```
+pip install -r requirements.txt 
+```
 
 ## Data
 
