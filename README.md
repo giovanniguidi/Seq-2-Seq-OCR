@@ -40,7 +40,7 @@ The project has this structure:
 
 - configs: configuration file
 
-- data_generators: data generator class and data augmentation functions
+- data_generator: data generator class and data augmentation functions
 
 - dataset: folder containing the dataset and the labels
 
@@ -48,11 +48,11 @@ The project has this structure:
 
 - figures: plots and figures
 
-- models: neural network model
+- model: neural network model
 
 - notebooks: notebooks for testing 
 
-- predictors: predictor class 
+- predictor: predictor class 
 
 - preprocessing: preprocessing functions (reading and normalizing the image)
 
@@ -62,7 +62,7 @@ The project has this structure:
 
 - test_images: images from the dataset that can be used for testing 
 
-- traines: trainer classes
+- trainer: trainer classes
 
 - utils: various utilities, including the one to generate the labels
 
