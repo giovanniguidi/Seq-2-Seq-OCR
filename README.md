@@ -117,7 +117,7 @@ To predict on a single image run:
 python main.py -c configs/config.yml --predict --filename FILENAME
 ```
 
-In "./test_images/" there are some images that can be used for fast testing. 
+In "./test_images/" there are some images that can be used for testing the model. 
 
 
 ## Performance
