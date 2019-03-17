@@ -4,11 +4,11 @@ import numpy as np
 import json
 import yaml
 
-from data_generators.data_generator import DataGenerator
+from data_generator.data_generator import DataGenerator
 
-from models.model_seq2seq import ModelSeq2Seq
-from trainers.trainer_seq2seq import TrainerSeq2Seq
-from predictors.predictor_seq2seq import PredictorSeq2Seq
+from model.model_seq2seq import ModelSeq2Seq
+from trainer.trainer_seq2seq import TrainerSeq2Seq
+from predictor.predictor_seq2seq import PredictorSeq2Seq
 from utils.score_prediction import score_prediction
 from preprocessing.preproc_functions import read_image_BW, normalize_0_mean_1_variance_BW
 
