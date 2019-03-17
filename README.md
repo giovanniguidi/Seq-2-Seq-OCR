@@ -10,9 +10,9 @@ In our case the "sequences" are the images from the IAM dataset, that contain ha
 
 A convolutional neural network extracts the features from the images at different locations, depending on the receptive field of the final neurons. Those features are flattened and encoded by an LSTM. The decoder (another LSTM) predicts the labels (i.e. the words) using as initial states the output of the encoder.
 
-## Requirements
+## Depencencies
 
-Install libraries with:
+Install the libraries using:
 ```
 pip install -r requirements.txt 
 ```
