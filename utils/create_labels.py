@@ -1,7 +1,7 @@
 import json
 from sklearn.model_selection import train_test_split
 
-def create_gt(data_folder, test_size, val_size, random_state):
+def create_labels(data_folder, test_size, val_size, random_state):
     """Function to split the IAM dataset in train/val/test and 
         create a json with labels 
 
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     val_size = 0.1 
     random_state = 45
     
-    dataset_out = create_gt(data_folder,  test_size = test_size, val_size = val_size, random_state = random_state)
+    dataset_out = create_labels(data_folder,  test_size = test_size, val_size = val_size, random_state = random_state)
     
     with open(data_folder + filename_out, 'w') as f:
         json.dump(dataset_out, f)
