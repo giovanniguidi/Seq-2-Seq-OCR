@@ -7,7 +7,7 @@ import json
 import string
 
 from base.base_data_generator import BaseDataGenerator
-from data_generator.data_augmentation import data_aug_functions
+from data_generators.data_augmentation import data_aug_functions
 from preprocessing.preproc_functions import read_image_BW, read_image_color, normalize_0_mean_1_variance_BW, normalize_0_mean_1_variance_color
 
 

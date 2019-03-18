@@ -40,19 +40,19 @@ The project has this structure:
 
 - configs: configuration file
 
-- data_generator: data generator class and data augmentation functions
+- data_generators: data generator class and data augmentation functions
 
-- dataset: folder containing the dataset and the labels
+- datasets: folder containing the dataset and the labels
 
 - experiments: contains snapshots, that can be used for restoring the training 
 
 - figures: plots and figures
 
-- model: neural network model
+- models: neural network model
 
 - notebooks: notebooks for testing 
 
-- predictor: predictor class 
+- predictors: predictor class 
 
 - preprocessing: preprocessing functions (reading and normalizing the image)
 
@@ -62,7 +62,7 @@ The project has this structure:
 
 - test_images: images from the dataset that can be used for testing 
 
-- trainer: trainer classes
+- trainers: trainer classes
 
 - utils: various utilities, including the one to generate the labels
 
@@ -111,13 +111,14 @@ python main.py -c configs/config.yml --predict_on_test
 
 (you need a file labels.json in "dataset").
 
-To predict on a single image run:
-
-```
-python main.py -c configs/config.yml --predict --filename FILENAME
-```
 
 In "./test_images/" there are some images that can be used for testing the model. 
+
+To predict on a single image you can run:
+
+```
+python main.py -c configs/config.yml --predict --filename test_images/test_images/f07-036-02-02.png
+```
 
 
 ## Performance

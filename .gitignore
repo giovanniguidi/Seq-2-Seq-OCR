@@ -3,7 +3,7 @@
 *.pyc
 */*.pyc
 */**/__pycache__/*
-dataset/words*
+datasets/words*
 tensorboard/*
 old/
 snapshots/*
