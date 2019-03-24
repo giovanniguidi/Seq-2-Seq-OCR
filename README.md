@@ -24,7 +24,7 @@ http://www.fki.inf.unibe.ch/databases/iam-handwriting-database (you need first t
 
 Put the "words" folder and words.txt file in "datasets". 
 
-Folder structure should be ./datasets/words/a01, ./datasets/words/a02, ... and ./dataset/words.txt.
+Folder structure should be ./datasets/words/a01, ./datasets/words/a02, ... and ./datasets/words.txt.
 
 This is an example of images in the dataset:
 
