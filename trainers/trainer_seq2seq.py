@@ -94,7 +94,7 @@ class TrainerSeq2Seq(BaseTrain):
         if self.config['callbacks']['reduce_lr_on_plateau']['enabled'] == True:
             monitor = self.config['callbacks']['reduce_lr_on_plateau']['monitor']
             factor = self.config['callbacks']['reduce_lr_on_plateau']['factor']
-            patience = self.config['callbacks']['model_last_checkpoint']['patience']
+            patience = self.config['callbacks']['reduce_lr_on_plateau']['patience']
             callbacks.append(ReduceLROnPlateau(monitor = monitor, factor = factor, patience = patience))
             
         return callbacks
