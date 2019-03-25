@@ -56,7 +56,6 @@ callbacks:
     model_last_checkpoint: 
         enabled: true
         out_file: "./experiments/snapshot_last.h5"
-        monitor: "val_loss"
     tensorboard: 
         enabled: false
         log_dir: "./tensorboard/"
