@@ -85,9 +85,8 @@ class TrainerSeq2Seq(BaseTrain):
 
         #last checkpoint
         if self.config['callbacks']['model_last_checkpoint']['enabled'] == True:
-            monitor = self.config['callbacks']['model_last_checkpoint']['monitor']
             filepath = self.config['callbacks']['model_last_checkpoint']['out_file']
-            callbacks.append(ModelCheckpoint(filepath, monitor=monitor, verbose=1, save_best_only=False, 
+            callbacks.append(ModelCheckpoint(filepath, verbose=1, save_best_only=False, 
                             save_weights_only=True))
 
         #reduce lr on plateau
