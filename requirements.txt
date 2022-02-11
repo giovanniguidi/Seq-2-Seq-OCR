@@ -10,7 +10,7 @@ Markdown==3.0.1
 nltk>=3.4.5
 numpy==1.16.2
 opencv-python==4.0.0.21
-protobuf==3.7.0
+protobuf==3.15.0
 PyYAML==5.1
 scipy==1.2.1
 singledispatch==3.4.0.3
